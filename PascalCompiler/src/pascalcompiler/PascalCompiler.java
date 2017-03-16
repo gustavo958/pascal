@@ -24,8 +24,7 @@ public class PascalCompiler {
 //        String pathflex = "/Users/juliomarin/NetBeansProjects/PascalCompiler/src/pascalcompiler/Lexer.Flex";
 //        File file = new File(pathflex);
 //        jflex.Main.generate(file);
-
-
+        
         String opciones[] = new String[7];
         opciones[0] = "-destdir";
         opciones[1] = "/Users/juliomarin/NetBeansProjects/PascalCompiler/src/pascalcompiler";

@@ -48,12 +48,10 @@ S = [ \t\r\n]
 "do" {return new Symbol(Token.PDO, yycolumn, yyline, new String(yytext()));}
 "while" {return new Symbol(Token.PWHILE, yycolumn, yyline, new String(yytext()));}
 "case" {return new Symbol(Token.PCASE, yycolumn, yyline, new String(yytext()));}
-"or else" {return new Symbol(Token.PORELSE, yycolumn, yyline, new String(yytext()));}
 "until" {return new Symbol(Token.PUNTIL, yycolumn, yyline, new String(yytext()));}
 "repeat" {return new Symbol(Token.PREPEAT, yycolumn, yyline, new String(yytext()));}
 "to" {return new Symbol(Token.PTO, yycolumn, yyline, new String(yytext()));}
 "with" {return new Symbol(Token.PWITH, yycolumn, yyline, new String(yytext()));}
-"and then" {return new Symbol(Token.PANDTHEN, yycolumn, yyline, new String(yytext()));}
 
 /* Aritmeticos */
 "+" {return new Symbol(Token.PMAS, yycolumn, yyline, new String(yytext()));}
@@ -79,6 +77,8 @@ S = [ \t\r\n]
 "or" {return new Symbol(Token.POR, yycolumn, yyline, new String(yytext()));}
 "not" {return new Symbol(Token.PNOT, yycolumn, yyline, new String(yytext()));}
 "xor" {return new Symbol(Token.PXOR, yycolumn, yyline, new String(yytext()));}
+"and then" {return new Symbol(Token.PANDTHEN, yycolumn, yyline, new String(yytext()));}
+"or else" {return new Symbol(Token.PORELSE, yycolumn, yyline, new String(yytext()));}
 
 /* Delimitadores */
 "[" {return new Symbol(Token.PBRACKETA, yycolumn, yyline, new String(yytext()));}

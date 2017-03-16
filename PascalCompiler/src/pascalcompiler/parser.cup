@@ -31,7 +31,7 @@ terminal String PWRITELN, PREADLN;
 terminal String PCONST, PDIV, PFILE, PVAR, PIN, POF, PPACKED, PSET, PTYPE, PSUBRANGE, PSHL, PSHR, PNEW;
 terminal String PID, PNUMERO, PENTERO, PFLOTANTE, PTEXTO, PERROR;
 
-non terminal String N_INICIA, S_INICIA, N_BLOQUE;
+non terminal String S_INICIA, N_INICIA, N_BLOQUE, N_SUBBLOQUE, N_SUBIF, N_EXPRESIONPADRE, N_EXPRESIONCENTRAL, N_EXPRESIONCOMPARA, N_OPERADORLOGICO, N_EXPRESIONCAPSULA, N_VALORESBOOLEANOS, N_SIMBOLOCOMPARE, N_IMPRIMIR;
 
 precedence left PORELSE, PANDTHEN;
 precedence left PDISTINTO, PCOMPARE, PMENOR, PMAYOR, PMENORIGUAL, PMAYORIGUAL, PIN;
@@ -45,4 +45,45 @@ S_INICIA::= N_INICIA:ni {: System.out.println("INICIAL"); :};
 
 N_INICIA::= PPROGRAM:pp PID:pd PPUNTOCOMA:pc PBEGIN:pb N_BLOQUE:bl PEND:pe {: System.out.println(pp+" - "+pd+" - "+pc+" - "+pb+" - BLOQUE - "+pe); :};
 
-N_BLOQUE::= PWRITELN:wr PPARA:pa PTEXTO:pt PPARC:pr PPUNTOCOMA:pc {: System.out.println(wr+" - "+pa+" - "+pt+" - "+pr+" - "+pc); :};
+N_BLOQUE::= N_BLOQUE:bl N_SUBBLOQUE:sb | N_SUBBLOQUE:sb;
+
+N_SUBBLOQUE::= N_SUBIF:sif | 
+               N_IMPRIMIR:imp;
+
+N_SUBIF::= PIF:pif N_EXPRESIONPADRE:ep PTHEN:pth N_BLOQUE:bl PPUNTOCOMA:pc |
+           PIF:pif N_EXPRESIONPADRE:ep PTHEN:pth N_BLOQUE:bla PELSE:el N_BLOQUE:blb PPUNTOCOMA:pc;
+
+N_EXPRESIONPADRE::= N_EXPRESIONCENTRAL:ece |
+                    N_EXPRESIONCOMPARA:eco;
+
+N_EXPRESIONCENTRAL::= N_EXPRESIONCENTRAL:ece N_OPERADORLOGICO:op N_EXPRESIONCAPSULA:eca |
+                      N_EXPRESIONCENTRAL:ece N_OPERADORLOGICO:op N_VALORESBOOLEANOS:vb |
+                      N_EXPRESIONCENTRAL:ece N_OPERADORLOGICO:op PID:ida |
+                      N_EXPRESIONCAPSULA:eca |
+                      N_VALORESBOOLEANOS:vb |
+                      PID:ida;
+                      
+N_EXPRESIONCAPSULA::= PPARA:pder N_EXPRESIONCENTRAL:ece PPARC:pizq |
+                      PPARA:pder N_EXPRESIONCOMPARA:eco PPARC:pizq;
+                      
+N_EXPRESIONCOMPARA::= PID:ida N_SIMBOLOCOMPARE:comp PID:idb |
+                      PNUMERO:numa N_SIMBOLOCOMPARE:comp PNUMERO:numb |
+                      PID:ida N_SIMBOLOCOMPARE:comp PNUMERO:numb |
+                      PNUMERO:numa N_SIMBOLOCOMPARE:comp PID:idb |
+                      PFLOTANTE:fla N_SIMBOLOCOMPARE:comp PFLOTANTE:flb |
+                      PFLOTANTE:fla N_SIMBOLOCOMPARE:comp PID:idb |
+                      PID:ida N_SIMBOLOCOMPARE:comp PFLOTANTE:flb |
+                      PTEXTO:txa N_SIMBOLOCOMPARE:comp PTEXTO:txb |
+                      PTEXTO:txa N_SIMBOLOCOMPARE:comp PID:idb |
+                      PID:ida N_SIMBOLOCOMPARE:comp PTEXTO:txb |
+                      N_VALORESBOOLEANOS:bla PCOMPARE:eq N_VALORESBOOLEANOS:blb |
+                      N_VALORESBOOLEANOS:bla PDISTINTO:dis N_VALORESBOOLEANOS:blb;
+
+N_VALORESBOOLEANOS::= PTRUE:tr | PFALSE:fl;
+
+N_SIMBOLOCOMPARE::= PDISTINTO:dis | PCOMPARE:eq | PMENOR:min | PMAYOR:max | PMENORIGUAL:mine | PMAYORIGUAL:maxe;
+
+N_OPERADORLOGICO::= PAND:pa | POR:po | PANDTHEN:pat | PORELSE:pel;
+                      
+N_IMPRIMIR::= PWRITELN:wr PPARA:pa PTEXTO:pt PPARC:pr PPUNTOCOMA:pc {: System.out.println(wr+" - "+pa+" - "+pt+" - "+pr+" - "+pc); :};
+
