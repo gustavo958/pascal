@@ -21,23 +21,27 @@ public class PascalCompiler {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-//        String pathflex = "/Users/juliomarin/NetBeansProjects/PascalCompiler/src/pascalcompiler/Lexer.Flex";
-//        File file = new File(pathflex);
-//        jflex.Main.generate(file);
         
-        String opciones[] = new String[7];
-        opciones[0] = "-destdir";
-        opciones[1] = "/Users/juliomarin/NetBeansProjects/PascalCompiler/src/pascalcompiler";
-        opciones[2] = "-parser";
-        opciones[3] = "analizador";
-        opciones[4] = "-symbols";
-        opciones[5] = "Token";
-        opciones[6] = "/Users/juliomarin/NetBeansProjects/PascalCompiler/src/pascalcompiler/parser.cup";
+        boolean salsa = false;
         
-        try {
-            java_cup.Main.main(opciones);
-        } catch (Exception ex) {
-            Logger.getLogger(HTMLEditorKit.Parser.class.getName()).log(Level.SEVERE, null, ex);
+        if (salsa) {
+            String pathflex = "/Users/juliomarin/NetBeansProjects/PascalCompiler/src/pascalcompiler/Lexer.Flex";
+            File file = new File(pathflex);
+            jflex.Main.generate(file);
+        } else {
+            String opciones[] = new String[7];
+            opciones[0] = "-destdir";
+            opciones[1] = "/Users/juliomarin/NetBeansProjects/PascalCompiler/src/pascalcompiler";
+            opciones[2] = "-parser";
+            opciones[3] = "analizador";
+            opciones[4] = "-symbols";
+            opciones[5] = "Token";
+            opciones[6] = "/Users/juliomarin/NetBeansProjects/PascalCompiler/src/pascalcompiler/parser.cup";
+            try {
+                java_cup.Main.main(opciones);
+            } catch (Exception ex) {
+                Logger.getLogger(HTMLEditorKit.Parser.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
     

@@ -86,6 +86,7 @@ S = [ \t\r\n]
 "(" {return new Symbol(Token.PPARA, yycolumn, yyline, new String(yytext()));}
 ")" {return new Symbol(Token.PPARC, yycolumn, yyline, new String(yytext()));}
 ";" {return new Symbol(Token.PPUNTOCOMA, yycolumn, yyline, new String(yytext()));}
+"." {return new Symbol(Token.PPUNTO, yycolumn, yyline, new String(yytext()));}
 "(*" {return new Symbol(Token.PCOMENTARIOA, yycolumn, yyline, new String(yytext()));}
 "*)" {return new Symbol(Token.PCOMENTARIOC, yycolumn, yyline, new String(yytext()));}
 

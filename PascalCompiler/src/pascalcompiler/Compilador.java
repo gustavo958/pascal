@@ -13,7 +13,11 @@ import java.io.*;
  */
 public class Compilador {
     public static void main(String[] args) throws Exception {
-        Reader read = new BufferedReader(new FileReader("pascal.txt"));
+        String caja[] = new String[3];
+        caja[0] = "pascal.txt";
+        caja[1] = "archivo.txt";
+        caja[2] = "salsa.txt";
+        Reader read = new BufferedReader(new FileReader(caja[1]));
         lexer lexico = new lexer(read);
         analizador sin = new analizador(lexico);
         sin.parse();

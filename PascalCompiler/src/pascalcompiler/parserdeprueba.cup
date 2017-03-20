@@ -1,0 +1,61 @@
+package pascalcompiler;
+import java_cup.runtime.*;
+
+parser code
+{:
+    public node elPadre;
+    public boolean errorSintaxis = false;
+    public void syntax_error(Symbol s) {
+        errorSintaxis = true;
+        System.out.print(" Error sintáctico en la línea " + (s.right+1) +" Columna "+s.left+ ". Identificador "
+        +s.value + " no reconocido. " );
+    }
+    public void unrecovered_syntax_error(Symbol s) throws java.lang.Exception{
+        errorSintaxis = false;
+        System.out.println("Error en la Línea " + (s.right+1)+ "Columna "+s.left+". Identificador " +
+        s.value + " no reconocido. ");
+    }
+:}
+
+terminal String PARRAY, PCARDINAL, PDOUBLE, PSHORTINT, PSMALLINT, PLONGINT, PINT64, PBYTE, PWORD, PLONGWORD, PCHARACTER, PREAL, PENUMERATED, PSTRING, PBOOLEAN, PINTEGER, PCHAR;
+terminal String PIF, PTHEN, PELSE, PFOR, PDO, PWHILE, PCASE, PORELSE, PUNTIL, PREPEAT, PTO, PWITH, PANDTHEN;
+terminal String PASIG, PMAS, PMENOS, PPOR, PENTRE, PMOD, PMOD2;
+terminal String PDISTINTO, PCOMPARE, PMENOR, PMAYOR, PMENORIGUAL, PMAYORIGUAL, PBITWISEL, PBITWISER;
+terminal String PXOR, PNOT, POR, PAND;
+terminal String PBRACKETA, PBRACKETC, PPARA, PPARC, PPUNTOCOMA, PPUNTO, PCOMENTARIOA, PCOMENTARIOC;
+terminal String PTRUE, PFALSE, PNIL;
+terminal String PPROGRAM, PBEGIN, PEND, PCLASS, PFUNCTION, PPROCEDURE, PRECORD;
+terminal String PCONTINUE, PDOWNTO, PGOTO, PRETURN, PBREAK, PLABEL;
+terminal String PDOSPUNTOS, PPOINTER, PDESDEHASTA, PCOMA;
+terminal String PWRITELN, PREADLN;
+terminal String PCONST, PDIV, PFILE, PVAR, PIN, POF, PPACKED, PSET, PTYPE, PSUBRANGE, PSHL, PSHR, PNEW;
+terminal String PID, PNUMERO, PENTERO, PFLOTANTE, PTEXTO, PERROR;
+
+non terminal String S_INICIA, N_INICIA, N_BLOQUE, N_BEGINENDBLOQUE, N_SUBBLOQUE, N_SUBIF, N_EXPRESIONPADRE, N_EXPRESIONCENTRAL, N_EXPRESIONCOMPARA, N_OPERADORLOGICO, N_EXPRESIONCAPSULA, N_VALORESBOOLEANOS, N_SIMBOLOCOMPARE, N_IMPRIMIR, N_ARITMETICO, N_OPERADORES, N_ARITMETICOCAPSULA, N_NUMERICOS, N_SUBFOR, N_IDCAPSULA, N_VARDECLARACION, N_SINVARDECLARACION, N_COMAID, N_TIPOS;
+
+precedence left PORELSE, PANDTHEN;
+precedence left PDISTINTO, PCOMPARE, PMENOR, PMAYOR, PMENORIGUAL, PMAYORIGUAL, PIN;
+precedence left PMAS, PMENOS, POR;
+precedence left PPOR, PENTRE, PMOD, PMOD2, PAND;
+precedence left PNOT;
+
+start with S_INICIA;
+
+S_INICIA::= N_INICIA:ni;
+
+N_INICIA::= PPROGRAM:pp PID:pd PPUNTOCOMA:pc PBEGIN:pb N_BLOQUE:bl PEND:pe PPUNTO:pu;
+
+N_BEGINENDBLOQUE::= PBEGIN:pb N_BLOQUE:bl PEND:pe PPUNTOCOMA:pc;
+
+N_BLOQUE::= N_BLOQUE:bl N_SUBBLOQUE:sb
+            | N_SUBBLOQUE:sb;
+
+N_SUBBLOQUE::= N_SUBIF:sif
+               | N_IMPRIMIR:imp;
+
+N_SUBIF::= PIF:pif PTHEN:pth N_BLOQUE:bl PPUNTOCOMA:pc
+           | PIF:pif PTHEN:pth N_IMPRIMIR:bla PELSE:el N_BLOQUE:blb PPUNTOCOMA:pc;
+
+N_SUBFOR::= PFOR:pf PID:ida PASIG:asi N_ARITMETICO:aria PTO:pto N_ARITMETICO:arib PDO:pdo N_BEGINENDBLOQUE:bebl;
+
+N_IMPRIMIR::= PWRITELN:wr PPARA:pa PTEXTO:pt PPARC:pr;

@@ -54,26 +54,26 @@ public class lexer implements java_cup.runtime.Scanner {
   private static final int [] ZZ_ACTION = zzUnpackAction();
 
   private static final String ZZ_ACTION_PACKED_0 =
-    "\1\0\1\1\1\2\1\3\1\1\1\4\1\1\1\5"+
-    "\22\4\1\6\1\7\1\10\1\11\1\12\1\13\1\14"+
-    "\1\15\1\4\1\16\1\17\1\20\1\21\1\22\1\23"+
-    "\1\24\1\4\1\0\1\25\1\26\1\0\1\27\10\4"+
-    "\1\30\1\31\1\32\5\4\1\33\1\34\16\4\1\35"+
-    "\15\4\1\36\1\37\1\40\1\41\1\42\1\43\1\44"+
-    "\1\4\1\45\1\4\1\46\1\4\1\47\11\4\1\50"+
-    "\3\4\1\51\1\52\1\53\2\4\1\0\5\4\1\54"+
-    "\3\4\1\55\1\56\1\57\6\4\1\60\7\4\1\61"+
-    "\3\4\1\62\1\63\1\4\1\0\1\4\1\64\4\4"+
-    "\1\65\3\4\1\66\6\4\1\0\2\4\1\67\3\4"+
-    "\1\70\4\4\1\71\1\72\1\73\1\74\1\4\1\75"+
-    "\1\76\2\4\1\77\4\4\1\100\1\0\5\4\1\101"+
-    "\1\102\5\4\1\103\1\104\2\4\1\0\1\105\1\106"+
-    "\1\4\1\107\6\4\1\110\1\111\4\4\1\0\1\112"+
-    "\1\113\1\114\1\115\3\4\1\116\1\117\3\4\1\0"+
-    "\4\4\1\120\3\4\1\121\2\4\1\0\3\4\1\122"+
-    "\1\123\1\4\1\124\1\125\4\4\1\126\2\4\1\127"+
-    "\1\130\1\131\1\132\1\4\1\133\1\4\1\134\1\135"+
-    "\1\136\1\137\1\4\1\140\1\4\1\141\1\142";
+    "\1\0\1\1\1\2\1\3\1\4\1\5\1\1\1\6"+
+    "\22\5\1\7\1\10\1\11\1\12\1\13\1\14\1\15"+
+    "\1\16\1\5\1\17\1\20\1\21\1\22\1\23\1\24"+
+    "\1\25\1\5\1\0\1\26\1\27\1\0\1\30\10\5"+
+    "\1\31\1\32\1\33\5\5\1\34\1\35\16\5\1\36"+
+    "\15\5\1\37\1\40\1\41\1\42\1\43\1\44\1\45"+
+    "\1\5\1\46\1\5\1\47\1\5\1\50\11\5\1\51"+
+    "\3\5\1\52\1\53\1\54\2\5\1\0\5\5\1\55"+
+    "\3\5\1\56\1\57\1\60\6\5\1\61\7\5\1\62"+
+    "\3\5\1\63\1\64\1\5\1\0\1\5\1\65\4\5"+
+    "\1\66\3\5\1\67\6\5\1\0\2\5\1\70\3\5"+
+    "\1\71\4\5\1\72\1\73\1\74\1\75\1\5\1\76"+
+    "\1\77\2\5\1\100\4\5\1\101\1\0\5\5\1\102"+
+    "\1\103\5\5\1\104\1\105\2\5\1\0\1\106\1\107"+
+    "\1\5\1\110\6\5\1\111\1\112\4\5\1\0\1\113"+
+    "\1\114\1\115\1\116\3\5\1\117\1\120\3\5\1\0"+
+    "\4\5\1\121\3\5\1\122\2\5\1\0\3\5\1\123"+
+    "\1\124\1\5\1\125\1\126\4\5\1\127\2\5\1\130"+
+    "\1\131\1\132\1\133\1\5\1\134\1\5\1\135\1\136"+
+    "\1\137\1\140\1\5\1\141\1\5\1\142\1\143";
 
   private static int [] zzUnpackAction() {
     int [] result = new int[295];
@@ -1024,395 +1024,399 @@ public class lexer implements java_cup.runtime.Scanner {
           case 1: 
             { return new Symbol(Token.PERROR, yycolumn, yyline, new String(yytext()));
             }
-          case 99: break;
+          case 100: break;
           case 2: 
             { return new Symbol(Token.PNUMERO, yycolumn, yyline, new String(yytext()));
             }
-          case 100: break;
+          case 101: break;
           case 3: 
             { return new Symbol(Token.PMENOS, yycolumn, yyline, new String(yytext()));
             }
-          case 101: break;
-          case 4: 
-            { return new Symbol(Token.PID, yycolumn, yyline, new String(yytext()));
-            }
           case 102: break;
-          case 5: 
-            { /*Ignore*/
+          case 4: 
+            { return new Symbol(Token.PPUNTO, yycolumn, yyline, new String(yytext()));
             }
           case 103: break;
-          case 6: 
-            { return new Symbol(Token.PMAS, yycolumn, yyline, new String(yytext()));
+          case 5: 
+            { return new Symbol(Token.PID, yycolumn, yyline, new String(yytext()));
             }
           case 104: break;
-          case 7: 
-            { return new Symbol(Token.PPOR, yycolumn, yyline, new String(yytext()));
+          case 6: 
+            { /*Ignore*/
             }
           case 105: break;
-          case 8: 
-            { return new Symbol(Token.PENTRE, yycolumn, yyline, new String(yytext()));
+          case 7: 
+            { return new Symbol(Token.PMAS, yycolumn, yyline, new String(yytext()));
             }
           case 106: break;
-          case 9: 
-            { return new Symbol(Token.PMOD2, yycolumn, yyline, new String(yytext()));
+          case 8: 
+            { return new Symbol(Token.PPOR, yycolumn, yyline, new String(yytext()));
             }
           case 107: break;
-          case 10: 
-            { return new Symbol(Token.PDOSPUNTOS, yycolumn, yyline, new String(yytext()));
+          case 9: 
+            { return new Symbol(Token.PENTRE, yycolumn, yyline, new String(yytext()));
             }
           case 108: break;
-          case 11: 
-            { return new Symbol(Token.PCOMPARE, yycolumn, yyline, new String(yytext()));
+          case 10: 
+            { return new Symbol(Token.PMOD2, yycolumn, yyline, new String(yytext()));
             }
           case 109: break;
-          case 12: 
-            { return new Symbol(Token.PMENOR, yycolumn, yyline, new String(yytext()));
+          case 11: 
+            { return new Symbol(Token.PDOSPUNTOS, yycolumn, yyline, new String(yytext()));
             }
           case 110: break;
-          case 13: 
-            { return new Symbol(Token.PMAYOR, yycolumn, yyline, new String(yytext()));
+          case 12: 
+            { return new Symbol(Token.PCOMPARE, yycolumn, yyline, new String(yytext()));
             }
           case 111: break;
-          case 14: 
-            { return new Symbol(Token.PBRACKETA, yycolumn, yyline, new String(yytext()));
+          case 13: 
+            { return new Symbol(Token.PMENOR, yycolumn, yyline, new String(yytext()));
             }
           case 112: break;
-          case 15: 
-            { return new Symbol(Token.PBRACKETC, yycolumn, yyline, new String(yytext()));
+          case 14: 
+            { return new Symbol(Token.PMAYOR, yycolumn, yyline, new String(yytext()));
             }
           case 113: break;
-          case 16: 
-            { return new Symbol(Token.PPARA, yycolumn, yyline, new String(yytext()));
+          case 15: 
+            { return new Symbol(Token.PBRACKETA, yycolumn, yyline, new String(yytext()));
             }
           case 114: break;
-          case 17: 
-            { return new Symbol(Token.PPARC, yycolumn, yyline, new String(yytext()));
+          case 16: 
+            { return new Symbol(Token.PBRACKETC, yycolumn, yyline, new String(yytext()));
             }
           case 115: break;
-          case 18: 
-            { return new Symbol(Token.PPUNTOCOMA, yycolumn, yyline, new String(yytext()));
+          case 17: 
+            { return new Symbol(Token.PPARA, yycolumn, yyline, new String(yytext()));
             }
           case 116: break;
-          case 19: 
-            { return new Symbol(Token.PPOINTER, yycolumn, yyline, new String(yytext()));
+          case 18: 
+            { return new Symbol(Token.PPARC, yycolumn, yyline, new String(yytext()));
             }
           case 117: break;
-          case 20: 
-            { return new Symbol(Token.PCOMA, yycolumn, yyline, new String(yytext()));
+          case 19: 
+            { return new Symbol(Token.PPUNTOCOMA, yycolumn, yyline, new String(yytext()));
             }
           case 118: break;
-          case 21: 
-            { return new Symbol(Token.PENTERO, yycolumn, yyline, new String(yytext()));
+          case 20: 
+            { return new Symbol(Token.PPOINTER, yycolumn, yyline, new String(yytext()));
             }
           case 119: break;
-          case 22: 
-            { return new Symbol(Token.PDESDEHASTA, yycolumn, yyline, new String(yytext()));
+          case 21: 
+            { return new Symbol(Token.PCOMA, yycolumn, yyline, new String(yytext()));
             }
           case 120: break;
-          case 23: 
-            { return new Symbol(Token.PTEXTO, yycolumn, yyline, new String(yytext()));
+          case 22: 
+            { return new Symbol(Token.PENTERO, yycolumn, yyline, new String(yytext()));
             }
           case 121: break;
-          case 24: 
-            { return new Symbol(Token.PDO, yycolumn, yyline, new String(yytext()));
+          case 23: 
+            { return new Symbol(Token.PDESDEHASTA, yycolumn, yyline, new String(yytext()));
             }
           case 122: break;
-          case 25: 
-            { return new Symbol(Token.PIN, yycolumn, yyline, new String(yytext()));
+          case 24: 
+            { return new Symbol(Token.PTEXTO, yycolumn, yyline, new String(yytext()));
             }
           case 123: break;
-          case 26: 
-            { return new Symbol(Token.PIF, yycolumn, yyline, new String(yytext()));
+          case 25: 
+            { return new Symbol(Token.PDO, yycolumn, yyline, new String(yytext()));
             }
           case 124: break;
-          case 27: 
-            { return new Symbol(Token.POR, yycolumn, yyline, new String(yytext()));
+          case 26: 
+            { return new Symbol(Token.PIN, yycolumn, yyline, new String(yytext()));
             }
           case 125: break;
-          case 28: 
-            { return new Symbol(Token.POF, yycolumn, yyline, new String(yytext()));
+          case 27: 
+            { return new Symbol(Token.PIF, yycolumn, yyline, new String(yytext()));
             }
           case 126: break;
-          case 29: 
-            { return new Symbol(Token.PTO, yycolumn, yyline, new String(yytext()));
+          case 28: 
+            { return new Symbol(Token.POR, yycolumn, yyline, new String(yytext()));
             }
           case 127: break;
-          case 30: 
-            { return new Symbol(Token.PCOMENTARIOC, yycolumn, yyline, new String(yytext()));
+          case 29: 
+            { return new Symbol(Token.POF, yycolumn, yyline, new String(yytext()));
             }
           case 128: break;
-          case 31: 
-            { return new Symbol(Token.PASIG, yycolumn, yyline, new String(yytext()));
+          case 30: 
+            { return new Symbol(Token.PTO, yycolumn, yyline, new String(yytext()));
             }
           case 129: break;
-          case 32: 
-            { return new Symbol(Token.PMENORIGUAL, yycolumn, yyline, new String(yytext()));
+          case 31: 
+            { return new Symbol(Token.PCOMENTARIOC, yycolumn, yyline, new String(yytext()));
             }
           case 130: break;
-          case 33: 
-            { return new Symbol(Token.PBITWISEL, yycolumn, yyline, new String(yytext()));
+          case 32: 
+            { return new Symbol(Token.PASIG, yycolumn, yyline, new String(yytext()));
             }
           case 131: break;
-          case 34: 
-            { return new Symbol(Token.PDISTINTO, yycolumn, yyline, new String(yytext()));
+          case 33: 
+            { return new Symbol(Token.PMENORIGUAL, yycolumn, yyline, new String(yytext()));
             }
           case 132: break;
-          case 35: 
-            { return new Symbol(Token.PMAYORIGUAL, yycolumn, yyline, new String(yytext()));
+          case 34: 
+            { return new Symbol(Token.PBITWISEL, yycolumn, yyline, new String(yytext()));
             }
           case 133: break;
-          case 36: 
-            { return new Symbol(Token.PBITWISER, yycolumn, yyline, new String(yytext()));
+          case 35: 
+            { return new Symbol(Token.PDISTINTO, yycolumn, yyline, new String(yytext()));
             }
           case 134: break;
-          case 37: 
-            { return new Symbol(Token.PCOMENTARIOA, yycolumn, yyline, new String(yytext()));
+          case 36: 
+            { return new Symbol(Token.PMAYORIGUAL, yycolumn, yyline, new String(yytext()));
             }
           case 135: break;
-          case 38: 
-            { return new Symbol(Token.PFLOTANTE, yycolumn, yyline, new String(yytext()));
+          case 37: 
+            { return new Symbol(Token.PBITWISER, yycolumn, yyline, new String(yytext()));
             }
           case 136: break;
-          case 39: 
-            { return new Symbol(Token.PAND, yycolumn, yyline, new String(yytext()));
+          case 38: 
+            { return new Symbol(Token.PCOMENTARIOA, yycolumn, yyline, new String(yytext()));
             }
           case 137: break;
-          case 40: 
-            { return new Symbol(Token.PDIV, yycolumn, yyline, new String(yytext()));
+          case 39: 
+            { return new Symbol(Token.PFLOTANTE, yycolumn, yyline, new String(yytext()));
             }
           case 138: break;
-          case 41: 
-            { return new Symbol(Token.PNIL, yycolumn, yyline, new String(yytext()));
+          case 40: 
+            { return new Symbol(Token.PAND, yycolumn, yyline, new String(yytext()));
             }
           case 139: break;
-          case 42: 
-            { return new Symbol(Token.PNOT, yycolumn, yyline, new String(yytext()));
+          case 41: 
+            { return new Symbol(Token.PDIV, yycolumn, yyline, new String(yytext()));
             }
           case 140: break;
-          case 43: 
-            { return new Symbol(Token.PNEW, yycolumn, yyline, new String(yytext()));
+          case 42: 
+            { return new Symbol(Token.PNIL, yycolumn, yyline, new String(yytext()));
             }
           case 141: break;
-          case 44: 
-            { return new Symbol(Token.PEND, yycolumn, yyline, new String(yytext()));
+          case 43: 
+            { return new Symbol(Token.PNOT, yycolumn, yyline, new String(yytext()));
             }
           case 142: break;
-          case 45: 
-            { return new Symbol(Token.PSET, yycolumn, yyline, new String(yytext()));
+          case 44: 
+            { return new Symbol(Token.PNEW, yycolumn, yyline, new String(yytext()));
             }
           case 143: break;
-          case 46: 
-            { return new Symbol(Token.PSHR, yycolumn, yyline, new String(yytext()));
+          case 45: 
+            { return new Symbol(Token.PEND, yycolumn, yyline, new String(yytext()));
             }
           case 144: break;
-          case 47: 
-            { return new Symbol(Token.PSHL, yycolumn, yyline, new String(yytext()));
+          case 46: 
+            { return new Symbol(Token.PSET, yycolumn, yyline, new String(yytext()));
             }
           case 145: break;
-          case 48: 
-            { return new Symbol(Token.PMOD, yycolumn, yyline, new String(yytext()));
+          case 47: 
+            { return new Symbol(Token.PSHR, yycolumn, yyline, new String(yytext()));
             }
           case 146: break;
-          case 49: 
-            { return new Symbol(Token.PFOR, yycolumn, yyline, new String(yytext()));
+          case 48: 
+            { return new Symbol(Token.PSHL, yycolumn, yyline, new String(yytext()));
             }
           case 147: break;
-          case 50: 
-            { return new Symbol(Token.PXOR, yycolumn, yyline, new String(yytext()));
+          case 49: 
+            { return new Symbol(Token.PMOD, yycolumn, yyline, new String(yytext()));
             }
           case 148: break;
-          case 51: 
-            { return new Symbol(Token.PVAR, yycolumn, yyline, new String(yytext()));
+          case 50: 
+            { return new Symbol(Token.PFOR, yycolumn, yyline, new String(yytext()));
             }
           case 149: break;
-          case 52: 
-            { return new Symbol(Token.PREAL, yycolumn, yyline, new String(yytext()));
+          case 51: 
+            { return new Symbol(Token.PXOR, yycolumn, yyline, new String(yytext()));
             }
           case 150: break;
-          case 53: 
-            { return new Symbol(Token.PCASE, yycolumn, yyline, new String(yytext()));
+          case 52: 
+            { return new Symbol(Token.PVAR, yycolumn, yyline, new String(yytext()));
             }
           case 151: break;
-          case 54: 
-            { return new Symbol(Token.PCHAR, yycolumn, yyline, new String(yytext()));
+          case 53: 
+            { return new Symbol(Token.PREAL, yycolumn, yyline, new String(yytext()));
             }
           case 152: break;
-          case 55: 
-            { return new Symbol(Token.PBYTE, yycolumn, yyline, new String(yytext()));
+          case 54: 
+            { return new Symbol(Token.PCASE, yycolumn, yyline, new String(yytext()));
             }
           case 153: break;
-          case 56: 
-            { return new Symbol(Token.PELSE, yycolumn, yyline, new String(yytext()));
+          case 55: 
+            { return new Symbol(Token.PCHAR, yycolumn, yyline, new String(yytext()));
             }
           case 154: break;
-          case 57: 
-            { return new Symbol(Token.PTRUE, yycolumn, yyline, new String(yytext()));
+          case 56: 
+            { return new Symbol(Token.PBYTE, yycolumn, yyline, new String(yytext()));
             }
           case 155: break;
-          case 58: 
-            { return new Symbol(Token.PTYPE, yycolumn, yyline, new String(yytext()));
+          case 57: 
+            { return new Symbol(Token.PELSE, yycolumn, yyline, new String(yytext()));
             }
           case 156: break;
-          case 59: 
-            { return new Symbol(Token.PTHEN, yycolumn, yyline, new String(yytext()));
+          case 58: 
+            { return new Symbol(Token.PTRUE, yycolumn, yyline, new String(yytext()));
             }
           case 157: break;
-          case 60: 
-            { return new Symbol(Token.PGOTO, yycolumn, yyline, new String(yytext()));
+          case 59: 
+            { return new Symbol(Token.PTYPE, yycolumn, yyline, new String(yytext()));
             }
           case 158: break;
-          case 61: 
-            { return new Symbol(Token.PWITH, yycolumn, yyline, new String(yytext()));
+          case 60: 
+            { return new Symbol(Token.PTHEN, yycolumn, yyline, new String(yytext()));
             }
           case 159: break;
-          case 62: 
-            { return new Symbol(Token.PWORD, yycolumn, yyline, new String(yytext()));
+          case 61: 
+            { return new Symbol(Token.PGOTO, yycolumn, yyline, new String(yytext()));
             }
           case 160: break;
-          case 63: 
-            { return new Symbol(Token.PFILE, yycolumn, yyline, new String(yytext()));
+          case 62: 
+            { return new Symbol(Token.PWITH, yycolumn, yyline, new String(yytext()));
             }
           case 161: break;
-          case 64: 
-            { return new Symbol(Token.PARRAY, yycolumn, yyline, new String(yytext()));
+          case 63: 
+            { return new Symbol(Token.PWORD, yycolumn, yyline, new String(yytext()));
             }
           case 162: break;
-          case 65: 
-            { return new Symbol(Token.PCLASS, yycolumn, yyline, new String(yytext()));
+          case 64: 
+            { return new Symbol(Token.PFILE, yycolumn, yyline, new String(yytext()));
             }
           case 163: break;
-          case 66: 
-            { return new Symbol(Token.PCONST, yycolumn, yyline, new String(yytext()));
+          case 65: 
+            { return new Symbol(Token.PARRAY, yycolumn, yyline, new String(yytext()));
             }
           case 164: break;
-          case 67: 
-            { return new Symbol(Token.PINT64, yycolumn, yyline, new String(yytext()));
+          case 66: 
+            { return new Symbol(Token.PCLASS, yycolumn, yyline, new String(yytext()));
             }
           case 165: break;
-          case 68: 
-            { return new Symbol(Token.PLABEL, yycolumn, yyline, new String(yytext()));
+          case 67: 
+            { return new Symbol(Token.PCONST, yycolumn, yyline, new String(yytext()));
             }
           case 166: break;
-          case 69: 
-            { return new Symbol(Token.PUNTIL, yycolumn, yyline, new String(yytext()));
+          case 68: 
+            { return new Symbol(Token.PINT64, yycolumn, yyline, new String(yytext()));
             }
           case 167: break;
-          case 70: 
-            { return new Symbol(Token.PBREAK, yycolumn, yyline, new String(yytext()));
+          case 69: 
+            { return new Symbol(Token.PLABEL, yycolumn, yyline, new String(yytext()));
             }
           case 168: break;
-          case 71: 
-            { return new Symbol(Token.PBEGIN, yycolumn, yyline, new String(yytext()));
+          case 70: 
+            { return new Symbol(Token.PUNTIL, yycolumn, yyline, new String(yytext()));
             }
           case 169: break;
-          case 72: 
-            { return new Symbol(Token.PWHILE, yycolumn, yyline, new String(yytext()));
+          case 71: 
+            { return new Symbol(Token.PBREAK, yycolumn, yyline, new String(yytext()));
             }
           case 170: break;
-          case 73: 
-            { return new Symbol(Token.PFALSE, yycolumn, yyline, new String(yytext()));
+          case 72: 
+            { return new Symbol(Token.PBEGIN, yycolumn, yyline, new String(yytext()));
             }
           case 171: break;
-          case 74: 
-            { return new Symbol(Token.PREADLN, yycolumn, yyline, new String(yytext()));
+          case 73: 
+            { return new Symbol(Token.PWHILE, yycolumn, yyline, new String(yytext()));
             }
           case 172: break;
-          case 75: 
-            { return new Symbol(Token.PRECORD, yycolumn, yyline, new String(yytext()));
+          case 74: 
+            { return new Symbol(Token.PFALSE, yycolumn, yyline, new String(yytext()));
             }
           case 173: break;
-          case 76: 
-            { return new Symbol(Token.PRETURN, yycolumn, yyline, new String(yytext()));
+          case 75: 
+            { return new Symbol(Token.PREADLN, yycolumn, yyline, new String(yytext()));
             }
           case 174: break;
-          case 77: 
-            { return new Symbol(Token.PREPEAT, yycolumn, yyline, new String(yytext()));
+          case 76: 
+            { return new Symbol(Token.PRECORD, yycolumn, yyline, new String(yytext()));
             }
           case 175: break;
-          case 78: 
-            { return new Symbol(Token.PDOUBLE, yycolumn, yyline, new String(yytext()));
+          case 77: 
+            { return new Symbol(Token.PRETURN, yycolumn, yyline, new String(yytext()));
             }
           case 176: break;
-          case 79: 
-            { return new Symbol(Token.PDOWNTO, yycolumn, yyline, new String(yytext()));
+          case 78: 
+            { return new Symbol(Token.PREPEAT, yycolumn, yyline, new String(yytext()));
             }
           case 177: break;
-          case 80: 
-            { return new Symbol(Token.PSTRING, yycolumn, yyline, new String(yytext()));
+          case 79: 
+            { return new Symbol(Token.PDOUBLE, yycolumn, yyline, new String(yytext()));
             }
           case 178: break;
-          case 81: 
-            { return new Symbol(Token.PPACKED, yycolumn, yyline, new String(yytext()));
+          case 80: 
+            { return new Symbol(Token.PDOWNTO, yycolumn, yyline, new String(yytext()));
             }
           case 179: break;
-          case 82: 
-            { return new Symbol(Token.PINTEGER, yycolumn, yyline, new String(yytext()));
+          case 81: 
+            { return new Symbol(Token.PSTRING, yycolumn, yyline, new String(yytext()));
             }
           case 180: break;
-          case 83: 
-            { return new Symbol(Token.PLONGINT, yycolumn, yyline, new String(yytext()));
+          case 82: 
+            { return new Symbol(Token.PPACKED, yycolumn, yyline, new String(yytext()));
             }
           case 181: break;
-          case 84: 
-            { return new Symbol(Token.PORELSE, yycolumn, yyline, new String(yytext()));
+          case 83: 
+            { return new Symbol(Token.PINTEGER, yycolumn, yyline, new String(yytext()));
             }
           case 182: break;
-          case 85: 
-            { return new Symbol(Token.PBOOLEAN, yycolumn, yyline, new String(yytext()));
+          case 84: 
+            { return new Symbol(Token.PLONGINT, yycolumn, yyline, new String(yytext()));
             }
           case 183: break;
-          case 86: 
-            { return new Symbol(Token.PWRITELN, yycolumn, yyline, new String(yytext()));
+          case 85: 
+            { return new Symbol(Token.PORELSE, yycolumn, yyline, new String(yytext()));
             }
           case 184: break;
-          case 87: 
-            { return new Symbol(Token.PPROGRAM, yycolumn, yyline, new String(yytext()));
+          case 86: 
+            { return new Symbol(Token.PBOOLEAN, yycolumn, yyline, new String(yytext()));
             }
           case 185: break;
-          case 88: 
-            { return new Symbol(Token.PANDTHEN, yycolumn, yyline, new String(yytext()));
+          case 87: 
+            { return new Symbol(Token.PWRITELN, yycolumn, yyline, new String(yytext()));
             }
           case 186: break;
-          case 89: 
-            { return new Symbol(Token.PCARDINAL, yycolumn, yyline, new String(yytext()));
+          case 88: 
+            { return new Symbol(Token.PPROGRAM, yycolumn, yyline, new String(yytext()));
             }
           case 187: break;
-          case 90: 
-            { return new Symbol(Token.PCONTINUE, yycolumn, yyline, new String(yytext()));
+          case 89: 
+            { return new Symbol(Token.PANDTHEN, yycolumn, yyline, new String(yytext()));
             }
           case 188: break;
-          case 91: 
-            { return new Symbol(Token.PLONGWORD, yycolumn, yyline, new String(yytext()));
+          case 90: 
+            { return new Symbol(Token.PCARDINAL, yycolumn, yyline, new String(yytext()));
             }
           case 189: break;
-          case 92: 
-            { return new Symbol(Token.PSUBRANGE, yycolumn, yyline, new String(yytext()));
+          case 91: 
+            { return new Symbol(Token.PCONTINUE, yycolumn, yyline, new String(yytext()));
             }
           case 190: break;
-          case 93: 
-            { return new Symbol(Token.PSHORTINT, yycolumn, yyline, new String(yytext()));
+          case 92: 
+            { return new Symbol(Token.PLONGWORD, yycolumn, yyline, new String(yytext()));
             }
           case 191: break;
-          case 94: 
-            { return new Symbol(Token.PSMALLINT, yycolumn, yyline, new String(yytext()));
+          case 93: 
+            { return new Symbol(Token.PSUBRANGE, yycolumn, yyline, new String(yytext()));
             }
           case 192: break;
-          case 95: 
-            { return new Symbol(Token.PFUNCTION, yycolumn, yyline, new String(yytext()));
+          case 94: 
+            { return new Symbol(Token.PSHORTINT, yycolumn, yyline, new String(yytext()));
             }
           case 193: break;
-          case 96: 
-            { return new Symbol(Token.PCHARACTER, yycolumn, yyline, new String(yytext()));
+          case 95: 
+            { return new Symbol(Token.PSMALLINT, yycolumn, yyline, new String(yytext()));
             }
           case 194: break;
-          case 97: 
-            { return new Symbol(Token.PPROCEDURE, yycolumn, yyline, new String(yytext()));
+          case 96: 
+            { return new Symbol(Token.PFUNCTION, yycolumn, yyline, new String(yytext()));
             }
           case 195: break;
-          case 98: 
-            { return new Symbol(Token.PENUMERATED, yycolumn, yyline, new String(yytext()));
+          case 97: 
+            { return new Symbol(Token.PCHARACTER, yycolumn, yyline, new String(yytext()));
             }
           case 196: break;
+          case 98: 
+            { return new Symbol(Token.PPROCEDURE, yycolumn, yyline, new String(yytext()));
+            }
+          case 197: break;
+          case 99: 
+            { return new Symbol(Token.PENUMERATED, yycolumn, yyline, new String(yytext()));
+            }
+          case 198: break;
           default:
             zzScanError(ZZ_NO_MATCH);
         }

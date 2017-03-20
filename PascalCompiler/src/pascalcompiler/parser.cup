@@ -22,7 +22,7 @@ terminal String PIF, PTHEN, PELSE, PFOR, PDO, PWHILE, PCASE, PORELSE, PUNTIL, PR
 terminal String PASIG, PMAS, PMENOS, PPOR, PENTRE, PMOD, PMOD2;
 terminal String PDISTINTO, PCOMPARE, PMENOR, PMAYOR, PMENORIGUAL, PMAYORIGUAL, PBITWISEL, PBITWISER;
 terminal String PXOR, PNOT, POR, PAND;
-terminal String PBRACKETA, PBRACKETC, PPARA, PPARC, PPUNTOCOMA, PCOMENTARIOA, PCOMENTARIOC;
+terminal String PBRACKETA, PBRACKETC, PPARA, PPARC, PPUNTOCOMA, PPUNTO, PCOMENTARIOA, PCOMENTARIOC;
 terminal String PTRUE, PFALSE, PNIL;
 terminal String PPROGRAM, PBEGIN, PEND, PCLASS, PFUNCTION, PPROCEDURE, PRECORD;
 terminal String PCONTINUE, PDOWNTO, PGOTO, PRETURN, PBREAK, PLABEL;
@@ -31,7 +31,7 @@ terminal String PWRITELN, PREADLN;
 terminal String PCONST, PDIV, PFILE, PVAR, PIN, POF, PPACKED, PSET, PTYPE, PSUBRANGE, PSHL, PSHR, PNEW;
 terminal String PID, PNUMERO, PENTERO, PFLOTANTE, PTEXTO, PERROR;
 
-non terminal String S_INICIA, N_INICIA, N_BLOQUE, N_SUBBLOQUE, N_SUBIF, N_EXPRESIONPADRE, N_EXPRESIONCENTRAL, N_EXPRESIONCOMPARA, N_OPERADORLOGICO, N_EXPRESIONCAPSULA, N_VALORESBOOLEANOS, N_SIMBOLOCOMPARE, N_IMPRIMIR;
+non terminal String S_INICIA, N_INICIA, N_BLOQUE, N_BEGINENDBLOQUE, N_SUBBLOQUE, N_SUBIF, N_EXPRESIONPADRE, N_EXPRESIONCENTRAL, N_EXPRESIONCOMPARA, N_OPERADORLOGICO, N_EXPRESIONCAPSULA, N_VALORESBOOLEANOS, N_SIMBOLOCOMPARE, N_IMPRIMIR, N_ARITMETICO, N_OPERADORES, N_ARITMETICOCAPSULA, N_NUMERICOS, N_SUBFOR, N_IDCAPSULA, N_VARDECLARACION, N_SINVARDECLARACION, N_COMAID, N_TIPOS, N_SUBWHILE, N_SUBCASE, N_CADACASO, N_PROGRENUMERICO;
 
 precedence left PORELSE, PANDTHEN;
 precedence left PDISTINTO, PCOMPARE, PMENOR, PMAYOR, PMENORIGUAL, PMAYORIGUAL, PIN;
@@ -43,47 +43,133 @@ start with S_INICIA;
 
 S_INICIA::= N_INICIA:ni {: System.out.println("INICIAL"); :};
 
-N_INICIA::= PPROGRAM:pp PID:pd PPUNTOCOMA:pc PBEGIN:pb N_BLOQUE:bl PEND:pe {: System.out.println(pp+" - "+pd+" - "+pc+" - "+pb+" - BLOQUE - "+pe); :};
+N_INICIA::= PPROGRAM:pp PID:pd PPUNTOCOMA:pc PBEGIN:pb N_BLOQUE:bl PEND:pe PPUNTO:pu {: System.out.println(pp+" - "+pd+" - "+pc+" - "+pb+" - BLOQUE - "+pe+" - "+pu); :}
+            | PPROGRAM:pp PID:pd PPUNTOCOMA:pc N_VARDECLARACION:vde PBEGIN:pb N_BLOQUE:bl PEND:pe PPUNTO:pu {: System.out.println(pp+" - "+pd+" - "+pc+" - VARDECLARACION - "+pb+" - BLOQUE - "+pe+" - "+pu); :};
 
-N_BLOQUE::= N_BLOQUE:bl N_SUBBLOQUE:sb | N_SUBBLOQUE:sb;
+N_BEGINENDBLOQUE::= PBEGIN:pb N_BLOQUE:bl PEND:pe PPUNTOCOMA:pc {: System.out.println(pb+" - BLOQUE - "+pe+" - "+pc); :};
 
-N_SUBBLOQUE::= N_SUBIF:sif | 
-               N_IMPRIMIR:imp;
+N_BLOQUE::= N_BLOQUE:bl N_SUBBLOQUE:sb {: System.out.println("BLOQUE - SUBBLOQUE"); :}
+            | N_SUBBLOQUE:sb {: System.out.println("SUBBLOQUE"); :};
 
-N_SUBIF::= PIF:pif N_EXPRESIONPADRE:ep PTHEN:pth N_BLOQUE:bl PPUNTOCOMA:pc |
-           PIF:pif N_EXPRESIONPADRE:ep PTHEN:pth N_BLOQUE:bla PELSE:el N_BLOQUE:blb PPUNTOCOMA:pc;
+N_SUBBLOQUE::= N_SUBIF:sif {: System.out.println("SUBIF"); :}
+               | N_SUBFOR:sfr {: System.out.println("SUBFOR"); :}
+               | N_SUBWHILE:wh {: System.out.println("SUBWHILE"); :}
+               | N_SUBCASE:sc {: System.out.println("SUBCASE"); :}
+               | N_IMPRIMIR:imp {: System.out.println("IMPRIMIR"); :};
 
-N_EXPRESIONPADRE::= N_EXPRESIONCENTRAL:ece |
-                    N_EXPRESIONCOMPARA:eco;
+N_SUBIF::= PIF:pif N_EXPRESIONPADRE:ep PTHEN:pth N_BLOQUE:bl PPUNTOCOMA:pc {: System.out.println(pif+" - EXPRESIONPADRE - "+pth+" - BLOQUE"); :}
+           | PIF:pif N_EXPRESIONPADRE:ep PTHEN:pth N_IMPRIMIR:bla PELSE:el N_BLOQUE:blb PPUNTOCOMA:pc {: System.out.println(pif+" - EXPRESIONPADRE - "+pth+" - BLOQUE - "+pc+" - "+el+" - BLOQUE"); :};
 
-N_EXPRESIONCENTRAL::= N_EXPRESIONCENTRAL:ece N_OPERADORLOGICO:op N_EXPRESIONCAPSULA:eca |
-                      N_EXPRESIONCENTRAL:ece N_OPERADORLOGICO:op N_VALORESBOOLEANOS:vb |
-                      N_EXPRESIONCENTRAL:ece N_OPERADORLOGICO:op PID:ida |
-                      N_EXPRESIONCAPSULA:eca |
-                      N_VALORESBOOLEANOS:vb |
-                      PID:ida;
+N_SUBCASE::= PCASE:ca N_IDCAPSULA:cap POF:po N_CADACASO:cc PEND:pe PPUNTOCOMA:pc {: System.out.println(ca+" - IDCAPSULA - "+po+" - CADACASO"+" - "+pe+" - "+pc); :}
+             | PCASE:ca PID:ida POF:po N_CADACASO:cc PEND:pe PPUNTOCOMA:pc {: System.out.println(ca+" - "+ida+" - "+po+" - CADACASO"+" - "+pe+" - "+pc); :};
+
+N_CADACASO::= N_CADACASO:cc N_NUMERICOS:numa PDOSPUNTOS:dp N_BEGINENDBLOQUE:bb {: System.out.println("CADACASO - NUMERICOS - "+dp+" - BEGINENDBLOQUE"); :}
+              | N_CADACASO:cc N_PROGRENUMERICO:pn PDOSPUNTOS:dp N_BEGINENDBLOQUE:bb {: System.out.println("CADACASO - PROGRENUMERICO - "+dp+" - BEGINENDBLOQUE"); :}
+              | N_NUMERICOS:numa PDOSPUNTOS:dp N_BEGINENDBLOQUE:bb {: System.out.println("NUMERICOS - "+dp+" - BEGINENDBLOQUE"); :}
+              | N_PROGRENUMERICO:pn PDOSPUNTOS:dp N_BEGINENDBLOQUE:bb {: System.out.println("PROGRENUMERICO - "+dp+" - BEGINENDBLOQUE"); :};
+
+N_PROGRENUMERICO::= N_NUMERICOS:numa PDESDEHASTA:da N_NUMERICOS:numb {: System.out.println("NUMERICOS - "+da+" - NUMERICOS"); :};
+
+N_EXPRESIONPADRE::= N_EXPRESIONCENTRAL:ece {: System.out.println("EXPRESIONCENTRAL"); :}
+                    | N_EXPRESIONCOMPARA:eco {: System.out.println("EXPRESIONCOMPARA"); :};
+
+N_EXPRESIONCENTRAL::= N_EXPRESIONCENTRAL:ece N_OPERADORLOGICO:op N_EXPRESIONCAPSULA:eca {: System.out.println("EXPRESIONCENTRAL - OPERADORLOGICO - EXPRESIONCAPSULA"); :}
+                      | N_EXPRESIONCENTRAL:ece N_OPERADORLOGICO:op N_VALORESBOOLEANOS:vb {: System.out.println("EXPRESIONCENTRAL - OPERADORLOGICO - VALORESBOOLEANOS"); :}
+                      | N_EXPRESIONCENTRAL:ece N_OPERADORLOGICO:op PID:ida {: System.out.println("EXPRESIONCENTRAL - OPERADORLOGICO - "+ida); :}
+                      | N_EXPRESIONCENTRAL:ece N_OPERADORLOGICO:op N_IDCAPSULA:capb {: System.out.println("EXPRESIONCENTRAL - OPERADORLOGICO - IDCAPSULA"); :}
+                      | N_IDCAPSULA:capa N_OPERADORLOGICO:op N_EXPRESIONCAPSULA:eca {: System.out.println("IDCAPSULA - OPERADORLOGICO - EXPRESIONCAPSULA"); :}
+                      | N_IDCAPSULA:capa N_OPERADORLOGICO:op N_VALORESBOOLEANOS:vb {: System.out.println("IDCAPSULA - OPERADORLOGICO - VALORESBOOLEANOS"); :}
+                      | N_IDCAPSULA:capa N_OPERADORLOGICO:op PID:idb {: System.out.println("IDCAPSULA - OPERADORLOGICO - "+idb); :}
+                      | N_IDCAPSULA:capa N_OPERADORLOGICO:op N_IDCAPSULA:capb {: System.out.println("IDCAPSULA - OPERADORLOGICO - IDCAPSULA"); :}
+                      | N_EXPRESIONCAPSULA:eca {: System.out.println("EXPRESIONCAPSULA"); :}
+                      | N_VALORESBOOLEANOS:vb {: System.out.println("VALORESBOOLEANOS"); :};
                       
-N_EXPRESIONCAPSULA::= PPARA:pder N_EXPRESIONCENTRAL:ece PPARC:pizq |
-                      PPARA:pder N_EXPRESIONCOMPARA:eco PPARC:pizq;
+N_EXPRESIONCAPSULA::= PPARA:pder N_EXPRESIONCENTRAL:ece PPARC:pizq {: System.out.println(pder+" - EXPRESIONCENTRAL - "+pizq); :}
+                      | PPARA:pder N_EXPRESIONCOMPARA:eco PPARC:pizq {: System.out.println(pder+" - EXPRESIONCOMPARA - "+pizq); :};
                       
-N_EXPRESIONCOMPARA::= PID:ida N_SIMBOLOCOMPARE:comp PID:idb |
-                      PNUMERO:numa N_SIMBOLOCOMPARE:comp PNUMERO:numb |
-                      PID:ida N_SIMBOLOCOMPARE:comp PNUMERO:numb |
-                      PNUMERO:numa N_SIMBOLOCOMPARE:comp PID:idb |
-                      PFLOTANTE:fla N_SIMBOLOCOMPARE:comp PFLOTANTE:flb |
-                      PFLOTANTE:fla N_SIMBOLOCOMPARE:comp PID:idb |
-                      PID:ida N_SIMBOLOCOMPARE:comp PFLOTANTE:flb |
-                      PTEXTO:txa N_SIMBOLOCOMPARE:comp PTEXTO:txb |
-                      PTEXTO:txa N_SIMBOLOCOMPARE:comp PID:idb |
-                      PID:ida N_SIMBOLOCOMPARE:comp PTEXTO:txb |
-                      N_VALORESBOOLEANOS:bla PCOMPARE:eq N_VALORESBOOLEANOS:blb |
-                      N_VALORESBOOLEANOS:bla PDISTINTO:dis N_VALORESBOOLEANOS:blb;
-
-N_VALORESBOOLEANOS::= PTRUE:tr | PFALSE:fl;
-
-N_SIMBOLOCOMPARE::= PDISTINTO:dis | PCOMPARE:eq | PMENOR:min | PMAYOR:max | PMENORIGUAL:mine | PMAYORIGUAL:maxe;
-
-N_OPERADORLOGICO::= PAND:pa | POR:po | PANDTHEN:pat | PORELSE:pel;
+N_EXPRESIONCOMPARA::= N_ARITMETICO:ara N_SIMBOLOCOMPARE:comp N_ARITMETICO:arb {: System.out.println("ARITMETICO - SIMBOLOCOMPARE - ARITMETICO"); :}
+                      | N_ARITMETICO:ara N_SIMBOLOCOMPARE:comp N_NUMERICOS:numb {: System.out.println("ARITMETICO - SIMBOLOCOMPARE - NUMERICOS"); :}
+                      | N_NUMERICOS:numa N_SIMBOLOCOMPARE:comp N_ARITMETICO:arb {: System.out.println("NUMERICOS - SIMBOLOCOMPARE - ARITMETICO"); :}
+                      | N_NUMERICOS:numa N_SIMBOLOCOMPARE:comp N_NUMERICOS:numb {: System.out.println("NUMERICOS - SIMBOLOCOMPARE - NUMERICOS"); :}
+                      | PTEXTO:txa N_SIMBOLOCOMPARE:comp PTEXTO:txb {: System.out.println(txa+" - SIMBOLOCOMPARE - "+txb); :}
+                      | PTEXTO:txa N_SIMBOLOCOMPARE:comp PID:idb {: System.out.println(txa+" - SIMBOLOCOMPARE - "+idb); :}
+                      | PID:ida N_SIMBOLOCOMPARE:comp PTEXTO:txb {: System.out.println(ida+" - SIMBOLOCOMPARE - "+txb); :}
+                      | N_VALORESBOOLEANOS:bla PCOMPARE:eq N_VALORESBOOLEANOS:blb {: System.out.println("VALORESBOOLEANOS - "+eq+" - VALORESBOOLEANOS"); :}
+                      | N_VALORESBOOLEANOS:bla PDISTINTO:dis N_VALORESBOOLEANOS:blb {: System.out.println("VALORESBOOLEANOS - "+dis+" - VALORESBOOLEANOS"); :};
                       
-N_IMPRIMIR::= PWRITELN:wr PPARA:pa PTEXTO:pt PPARC:pr PPUNTOCOMA:pc {: System.out.println(wr+" - "+pa+" - "+pt+" - "+pr+" - "+pc); :};
+N_VALORESBOOLEANOS::= PTRUE:tr {: System.out.println(tr); :}
+                      | PFALSE:fl {: System.out.println(fl); :};
+
+N_SIMBOLOCOMPARE::= PDISTINTO:dis {: System.out.println(dis); :}
+                    | PCOMPARE:eq {: System.out.println(eq); :}
+                    | PMENOR:min {: System.out.println(min); :}
+                    | PMAYOR:max {: System.out.println(max); :}
+                    | PMENORIGUAL:mine {: System.out.println(mine); :}
+                    | PMAYORIGUAL:maxe {: System.out.println(maxe); :};
+
+N_OPERADORLOGICO::= PAND:pa {: System.out.println(pa); :}
+                    | POR:po {: System.out.println(po); :}
+                    | PANDTHEN:pat {: System.out.println(pat); :}
+                    | PORELSE:pel {: System.out.println(pel); :};
+
+N_SUBFOR::= PFOR:pf PID:ida PASIG:asi N_ARITMETICO:aria PTO:pto N_ARITMETICO:arib PDO:pdo N_BEGINENDBLOQUE:bebl {: System.out.println(pf+" - "+ida+" - "+asi+" - ARITMETICO - "+pto+" - ARITMETICO - "+pdo+" - BEGINENDBLOQUE - "); :};
+
+N_SUBWHILE::= PWHILE:wh N_EXPRESIONPADRE:ep PDO:pdo N_BEGINENDBLOQUE:bebl {: System.out.println(wh+" - EXPRESIONPADRE - "+pdo+" - BEGINENDBLOQUE"); :};
+
+N_ARITMETICO::= N_ARITMETICO:ar N_OPERADORES:op N_ARITMETICOCAPSULA:ca {: System.out.println("ARITMETICO - OPERADORES - ARITMETICOCAPSULA"); :}
+                | N_ARITMETICO:ar N_OPERADORES:op N_NUMERICOS:nu {: System.out.println("ARITMETICO - OPERADORES - NUMERICOS"); :}
+                | N_ARITMETICO:ar N_OPERADORES:op PID:ida {: System.out.println("ARITMETICO - OPERADORES - "+ida); :}
+                | N_ARITMETICO:ar N_OPERADORES:op N_IDCAPSULA:capb {: System.out.println("ARITMETICO - OPERADORES - IDCAPSULA"); :}
+                | N_NUMERICOS:nua N_OPERADORES:op N_ARITMETICOCAPSULA:ca {: System.out.println("NUMERICOS - OPERADORES - ARITMETICOCAPSULA"); :}
+                | N_NUMERICOS:nua N_OPERADORES:op N_NUMERICOS:nub {: System.out.println("NUMERICOS - OPERADORES - NUMERICOS"); :}
+                | N_NUMERICOS:nua N_OPERADORES:op PID:ida {: System.out.println("NUMERICOS - OPERADORES - "+ida); :}
+                | N_NUMERICOS:nua N_OPERADORES:op N_IDCAPSULA:capb {: System.out.println("NUMERICOS - OPERADORES - IDCAPSULA"); :}
+                | PID:ida N_OPERADORES:op N_ARITMETICOCAPSULA:ca {: System.out.println(ida+" - OPERADORES - ARITMETICOCAPSULA"); :}
+                | PID:ida N_OPERADORES:op N_NUMERICOS:nua {: System.out.println(ida+" - OPERADORES - NUMERICOS"); :}
+                | PID:ida N_OPERADORES:op PID:idb {: System.out.println(ida+" - OPERADORES - "+idb); :}
+                | PID:ida N_OPERADORES:op N_IDCAPSULA:capb {: System.out.println(ida+" - OPERADORES - IDCAPSULA"); :}
+                | N_IDCAPSULA:cap N_OPERADORES:op N_ARITMETICOCAPSULA:ca {: System.out.println("IDCAPSULA - OPERADORES - ARITMETICOCAPSULA"); :}
+                | N_IDCAPSULA:cap N_OPERADORES:op N_NUMERICOS:nua {: System.out.println("IDCAPSULA - OPERADORES - NUMERICOS"); :}
+                | N_IDCAPSULA:cap N_OPERADORES:op PID:idb {: System.out.println("IDCAPSULA - OPERADORES - "+idb); :}
+                | N_IDCAPSULA:capa N_OPERADORES:op N_IDCAPSULA:capb {: System.out.println("IDCAPSULA - OPERADORES - IDCAPSULA"); :}
+                | N_ARITMETICOCAPSULA:ca {: System.out.println("ARITMETICOCAPSULA"); :};
+
+N_ARITMETICOCAPSULA::= PPARA:pder N_ARITMETICO:ar PPARC:pizq {: System.out.println(pder+" - ARITMETICO - "+pizq); :}
+                       | PPARA:pder N_NUMERICOS:nua PPARC:pizq {: System.out.println(pder+" - NUMERICOS - "+pizq); :};
+
+N_IDCAPSULA::= PPARA:pder PID:ida PPARC:pizq {: System.out.println(pder+" - "+ida+" - "+pizq); :};
+                       
+N_NUMERICOS::= PFLOTANTE:fla {: System.out.println(fla); :}
+               | PNUMERO:numa {: System.out.println(numa); :};
+
+N_OPERADORES::= PMAS:mas {: System.out.println(mas); :}
+                | PPOR:por {: System.out.println(por); :}
+                | PMENOS:menos {: System.out.println(menos); :}
+                | PENTRE:entre {: System.out.println(entre); :}
+                | PMOD:mod {: System.out.println(mod); :}
+                | PMOD2:mod {: System.out.println(mod); :};
+
+N_VARDECLARACION::= N_VARDECLARACION:vd PVAR:var N_SINVARDECLARACION:svd {: System.out.println("VARDECLARACION - "+var+" - SINVARDECLARACION"); :}
+                    | PVAR:var N_SINVARDECLARACION:svd {: System.out.println(var+" - SINVARDECLARACION"); :};
+                    
+N_SINVARDECLARACION::= N_SINVARDECLARACION:svd PID:ida PDOSPUNTOS:dp N_TIPOS:tp PPUNTOCOMA:pc {: System.out.println("SINVARDECLARACION - "+ida+" - "+dp+" - TIPOS - "+pc); :}
+                       | N_SINVARDECLARACION:svd PID:ida PDOSPUNTOS:dp PARRAY:arr PBRACKETA:ba N_PROGRENUMERICO:pnu PBRACKETC:bc POF:pof N_TIPOS:tp PPUNTOCOMA:pc {: System.out.println("SINVARDECLARACION - "+ida+" - "+dp+" - "+arr+" - "+ba+" - PROGRENUMERICO - "+bc+" - "+pof+" - TIPOS - "+pc); :}
+                       | N_SINVARDECLARACION:svd N_COMAID:cm PDOSPUNTOS:dp N_TIPOS:tp PPUNTOCOMA:pc {: System.out.println("SINVARDECLARACION - COMAID - "+dp+" - TIPOS - "+pc); :}
+                       | PID:ida PDOSPUNTOS:dp N_TIPOS:tp PPUNTOCOMA:pc {: System.out.println(ida+" - "+dp+" - TIPOS - "+pc); :}
+                       | PID:ida PDOSPUNTOS:dp PARRAY:arr PBRACKETA:ba N_PROGRENUMERICO:pnu PBRACKETC:bc POF:pof N_TIPOS:tp PPUNTOCOMA:pc {: System.out.println(ida+" - "+dp+" - "+arr+" - "+ba+" - PROGRENUMERICO - "+bc+" - "+pof+" - TIPOS - "+pc); :}
+                       | N_COMAID:cm PDOSPUNTOS:dp N_TIPOS:tp PPUNTOCOMA:pc {: System.out.println("COMAID - "+dp+" - TIPOS - "+pc); :};
+
+N_COMAID::= N_COMAID:ci PCOMA:cm PID:ida {: System.out.println("COMAID - "+cm+" - "+ida); :}
+            | PID:ida PCOMA:cm PID:idb {: System.out.println(ida+" - "+cm+" - "+idb); :};
+
+N_TIPOS::= PINTEGER:ent {: System.out.println(ent); :}
+           | PBOOLEAN:bl {: System.out.println(bl); :}
+           | PCHAR:cr {: System.out.println(cr); :}
+           | PSMALLINT:smi {: System.out.println(smi); :}
+           | PSHORTINT:shi {: System.out.println(shi); :}
+           | PSTRING:str {: System.out.println(str); :}
+           | PLONGINT:lin {: System.out.println(lin); :}
+           | PREAL:rl {: System.out.println(rl); :};
+
+N_IMPRIMIR::= PWRITELN:wr PPARA:pa PTEXTO:pt PPARC:pr {: System.out.println(wr+" - "+pa+" - "+pt+" - "+pr+" - "); :};
 
